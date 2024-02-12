@@ -1,0 +1,103 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body{
+  background-color:bisque;
+}
+
+.user-template{
+  display: inline-block;
+  height: 300px;
+  width: 300px;
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 300px;
+  font-size: 36px;
+  font-family:monospace;
+  color:#282c34;
+}
+
+.header{
+  background-color:peru;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #fff;
+  padding: 0 16px;
+}
+
+.navbar a {
+  margin-top: 10px;
+  margin-left: 30px;
+  color:bisque;
+  text-decoration: none;
+  margin-right: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family:monospace;
+  
+}
+
+.navbar a :hover{
+  background-color: bisque;
+  color: peru;
+}
+
+.add-transaction{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add-transaction-header{
+  color: #cf8740;
+  font-family: monospace;
+  margin: 40px;
+}
+
+.breakdown{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
