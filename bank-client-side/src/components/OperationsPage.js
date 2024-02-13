@@ -5,7 +5,6 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
-
 import SnackbarMessage from './SnackbarMessage';
 
 const OperationsPage = ({ balance }) => {
@@ -48,6 +47,9 @@ const OperationsPage = ({ balance }) => {
         setDate('');
         setSnackbarMessage('Expense added successfully');
         setSnackbarOpen(true);
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1000); 
       })
       .catch(error => {
         console.error('Error adding transaction:', error);

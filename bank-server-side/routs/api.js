@@ -4,23 +4,33 @@ const Transaction = require('../model/Transaction');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    try {
-      let query = {};
-      if (req.query.month && req.query.year) {
-        query = {
-          date: {
-            $gte: new Date(req.query.year, req.query.month - 1, 1),
-            $lte: new Date(req.query.year, req.query.month, 0),
-          },
-        };
-      }
-      const transactions = await Transaction.find(query);
-      res.json(transactions);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Server Error' });
+  try {
+    let { page, limit } = req.query;
+    page = parseInt(page) || 1;
+    limit = parseInt(limit) || 6;
+    const skip = (page - 1) * limit;
+    
+    let query = {};
+    if (req.query.month && req.query.year) {
+      query = {
+        date: {
+          $gte: new Date(req.query.year, req.query.month - 1, 1),
+          $lte: new Date(req.query.year, req.query.month, 0),
+        },
+      };
     }
+    
+    const transactions = await Transaction.find(query).skip(skip).limit(limit);
+    const totalTransactions = await Transaction.countDocuments(query);
+    const totalPages = Math.ceil(totalTransactions / limit);
+    
+    res.json({ transactions, totalPages });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
 });
+
   
 
 router.post('/', async (req, res) => {

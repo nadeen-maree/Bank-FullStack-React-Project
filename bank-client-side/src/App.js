@@ -10,17 +10,31 @@ import './App.css'
 
 const App = () => {
   const [balance, setBalance] = useState(0);
-
-  const fetchBalance = () => {
-    axios.get('http://localhost:5555/transactions')
-      .then(response => {
-        const totalBalance = response.data.reduce((acc, curr) => acc + curr.amount, 0);
-        setBalance(totalBalance);
-      })
-      .catch(error => {
-        console.error('Error fetching transactions:', error);
-      });
+  const transactionsPerPage = 6;
+  
+  const fetchBalance = async () => {
+    try {
+      let currentPage = 1;
+      let totalPages = 1;
+      let totalBalance = 0;
+  
+      while (currentPage <= totalPages) {
+        const response = await axios.get(`http://localhost:5555/transactions?page=${currentPage}&limit=${transactionsPerPage}`);
+        const { transactions, totalPages: pages } = response.data;
+        totalPages = pages;
+  
+        const pageBalance = transactions.reduce((acc, curr) => acc + curr.amount, 0);
+        totalBalance += pageBalance;
+  
+        currentPage++;
+      }
+  
+      setBalance(totalBalance);
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+    }
   };
+  
 
   useEffect(() => {
     fetchBalance();
