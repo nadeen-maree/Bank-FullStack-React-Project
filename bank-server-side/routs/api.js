@@ -1,6 +1,6 @@
 const express = require('express');
 const Transaction = require('../model/Transaction');
-
+const axios = require('axios');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -78,5 +78,25 @@ router.get('/breakdown', async (req, res) => {
     }
 });
 
+
+router.get('/exchange-rates', async (req, res) => {
+  try {
+    const apiKey = '114483f1dfe36f0dd3894c4d'; 
+    const apiUrl = `https://api.exchangerate-api.com/v4/latest/USD`;
+    
+    const response = await axios.get(apiUrl, {
+      headers: {
+        'X-RapidAPI-Key': apiKey
+      }
+    });
+    
+    const exchangeRates = response.data;
+    
+    res.json(exchangeRates);
+  } catch (error) {
+    console.error('Error fetching exchange rates:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
 
 module.exports = router;

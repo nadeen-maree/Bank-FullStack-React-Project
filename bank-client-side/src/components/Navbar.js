@@ -8,6 +8,7 @@ const Navbar = ({balance}) => {
         <Link to="/"><div className="navbar-link">Transactions</div></Link>
         <Link to="/operations"> <div className="navbar-link">Operations</div></Link>
         <Link to="/breakdown"> <div className="navbar-link">Breakdown</div></Link>
+        <Link to="/exchange-rates"> <div className="navbar-link">Exchange Rates</div></Link>
         <div style={{marginLeft: 'auto', marginRight: 20}}>
            <h1 style={{ color: balance >= 500 ? 'green' : 'red' }}>Balance: ${balance}</h1>
         </div>

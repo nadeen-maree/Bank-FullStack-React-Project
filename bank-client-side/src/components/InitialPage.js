@@ -25,9 +25,12 @@ const InitialPage = () => {
   }, [currentPage, transactionsPerPage]);
 
   useEffect(() => {
-    setFilteredByCategory(transactions.filter(transaction =>
-      transaction.category.toLowerCase().includes(searchQuery.toLowerCase())
-    ));
+    if (transactions.length > 0) {
+      const filteredTransactions = transactions.filter(transaction =>
+        transaction.category.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredByCategory(filteredTransactions);
+    }
   }, [searchQuery, transactions]);
 
   const handleDelete = (id) => {

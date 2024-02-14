@@ -4,14 +4,16 @@ import InitialPage from './components/InitialPage';
 import OperationsPage from './components/OperationsPage';
 import BreakdownPage from './components/BreakdownPage';
 import Navbar from './components/Navbar';
+import ExchangeRates from './components/ExchangeRates';
 import axios from 'axios';
 import './App.css'
+
 
 
 const App = () => {
   const [balance, setBalance] = useState(0);
   const transactionsPerPage = 6;
-  
+
   const fetchBalance = async () => {
     try {
       let currentPage = 1;
@@ -58,6 +60,7 @@ const App = () => {
           <Route path="/" element={<InitialPage />} />
           <Route path="/operations" element={<OperationsPage  balance={balance}/> } />
           <Route path="/breakdown" element={<BreakdownPage />} />
+          <Route path="/exchange-rates" element={<ExchangeRates />} />
         </Routes>
         
       </div>
